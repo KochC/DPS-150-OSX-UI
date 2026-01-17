@@ -1,0 +1,25 @@
+name: dps150_control
+description: Flutter macOS app for controlling FNIRSI DPS-150 power supply
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  liquid_flutter: ^22.0.4
+  provider: ^6.1.1
+  fl_chart: ^0.68.0
+  # Note: Serial port communication will need to be implemented via platform channels
+  # or a custom plugin. The packages serial_port and serial_port_available don't exist.
+  # For now, we'll need to create platform channel implementations.
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
