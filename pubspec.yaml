@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  liquid_flutter: ^22.0.4
+  liquid_flutter: ^22.0.1
   provider: ^6.1.1
   fl_chart: ^0.68.0
   # Note: Serial port communication will need to be implemented via platform channels
