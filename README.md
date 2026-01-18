@@ -16,10 +16,23 @@ A native macOS application for controlling the FNIRSI DPS-150 programmable power
 ## Requirements
 
 - macOS 10.14 or later
-- Flutter SDK 3.0.0 or later
 - DPS-150 device connected via USB
 
 ## Installation
+
+### Download Pre-built Release (Recommended)
+
+1. Go to the [Releases](https://github.com/KochC/DPS-150-OSX-UI/releases) page
+2. Download the latest `dps150_control-macos.zip` file
+3. Extract the ZIP file
+4. Move `dps150_control.app` to your Applications folder
+5. Launch the app from Applications
+
+> **Note**: On first launch, macOS may show a security warning. Go to System Preferences > Security & Privacy and click "Open Anyway" if needed.
+
+### Build from Source
+
+If you want to build the app yourself:
 
 1. **Install Flutter** (if not already installed):
    ```bash
@@ -43,6 +56,27 @@ A native macOS application for controlling the FNIRSI DPS-150 programmable power
 
 ## Building for Release
 
+### Automated Builds (CI/CD)
+
+This project uses GitHub Actions to automatically build and release the app when tags are pushed:
+
+1. **Create a release tag**:
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+
+2. **GitHub Actions will automatically**:
+   - Build the macOS app using Flutter
+   - Create a ZIP archive
+   - Create a GitHub release with the built app attached
+
+The workflow is defined in `.github/workflows/build-and-release.yml` and triggers on tags matching `v*`.
+
+### Local Build
+
+To build the app locally:
+
 1. **Build the app**:
    ```bash
    flutter build macos --release
@@ -51,6 +85,12 @@ A native macOS application for controlling the FNIRSI DPS-150 programmable power
 2. **The built app will be in**:
    ```
    build/macos/Build/Products/Release/dps150_control.app
+   ```
+
+3. **Create a distributable archive** (optional):
+   ```bash
+   cd build/macos/Build/Products/Release
+   zip -r dps150_control-macos.zip dps150_control.app
    ```
 
 ## Usage
@@ -105,6 +145,20 @@ If you see permission errors:
 1. Go to System Preferences > Security & Privacy > Privacy
 2. Add the app to the list of applications allowed to access serial ports
 3. Restart the app
+
+## Releases
+
+Releases are automatically created via GitHub Actions when version tags are pushed. Each release includes:
+
+- Pre-built macOS application (`dps150_control-macos.zip`)
+- Release notes (auto-generated from commits)
+- Source code for the tagged version
+
+To create a new release:
+1. Update the version in `pubspec.yaml`
+2. Commit and push your changes
+3. Create and push a version tag: `git tag v1.0.0 && git push origin v1.0.0`
+4. The GitHub Actions workflow will automatically build and publish the release
 
 ## Development
 
