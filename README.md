@@ -4,6 +4,12 @@ A native macOS application for controlling the FNIRSI DPS-150 programmable power
 
 > **Note**: This is a standalone Flutter application. For the Python library, see the [DPS-150 Python Library](https://github.com/KochC/DPS-150-python-library) repository.
 
+<div align="center">
+  <img src="docs/app-icon.png" alt="App Icon" width="128">
+  <br><br>
+  <img src="docs/home-screen.png" alt="Home Screen" width="800">
+</div>
+
 ## Features
 
 - **Automatic Device Detection**: Automatically scans USB ports and connects to DPS-150 devices
