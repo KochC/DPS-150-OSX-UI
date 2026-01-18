@@ -2,6 +2,8 @@
 
 A native macOS application for controlling the FNIRSI DPS-150 programmable power supply via serial communication.
 
+> **⚠️ Work in Progress**: This application is currently under active development. Some features may be incomplete or subject to change. Use at your own risk.
+
 > **Note**: This is a standalone Flutter application. For the Python library, see the [DPS-150 Python Library](https://github.com/KochC/DPS-150-python-library) repository.
 
 <div align="center">
