@@ -215,7 +215,7 @@ class _TimeGraphState extends State<TimeGraph> {
   List<LineChartBarData> _getVoltageLineSegments() {
     return _getLineSegments(
       (point) => (point.voltage / _maxValue) * 10.0,
-      Colors.blue,
+      Colors.yellow,
     );
   }
 
@@ -231,7 +231,7 @@ class _TimeGraphState extends State<TimeGraph> {
   List<LineChartBarData> _getPowerLineSegments() {
     return _getLineSegments(
       (point) => (point.power / _maxValue) * 10.0,
-      Colors.orange,
+      Colors.blue,
     );
   }
 
@@ -314,16 +314,7 @@ class _TimeGraphState extends State<TimeGraph> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Time Graph',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: 300,
+            Expanded(
               child: _dataPoints.isEmpty
                   ? Center(
                       child: Text(
@@ -339,6 +330,11 @@ class _TimeGraphState extends State<TimeGraph> {
                         lineTouchData: LineTouchData(
                           enabled: true,
                           touchTooltipData: LineTouchTooltipData(
+                            fitInsideHorizontally: true,
+                            fitInsideVertically: true,
+                            tooltipMargin: 8,
+                            tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                            getTooltipColor: (touchedSpot) => Theme.of(context).colorScheme.surfaceContainerHighest,
                             getTooltipItems: (List<LineBarSpot> touchedSpots) {
                               return touchedSpots.map((LineBarSpot touchedSpot) {
                                 final point = _getDataPointAtTime(touchedSpot.x);
@@ -349,7 +345,7 @@ class _TimeGraphState extends State<TimeGraph> {
                                 if (touchedSpot.barIndex == 0) {
                                   // Voltage
                                   label = 'V: ${point.voltage.toStringAsFixed(2)}';
-                                  color = Colors.blue;
+                                  color = Colors.yellow;
                                 } else if (touchedSpot.barIndex == 1) {
                                   // Current
                                   label = 'A: ${point.current.toStringAsFixed(3)}';
@@ -357,7 +353,7 @@ class _TimeGraphState extends State<TimeGraph> {
                                 } else {
                                   // Power
                                   label = 'W: ${point.power.toStringAsFixed(2)}';
-                                  color = Colors.orange;
+                                  color = Colors.blue;
                                 }
                                 
                                 return LineTooltipItem(
@@ -365,6 +361,7 @@ class _TimeGraphState extends State<TimeGraph> {
                                   TextStyle(
                                     color: color,
                                     fontWeight: FontWeight.bold,
+                                    fontSize: 10,
                                   ),
                                 );
                               }).toList();
@@ -486,11 +483,11 @@ class _TimeGraphState extends State<TimeGraph> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildLegendItem('Voltage (V)', Colors.blue),
+                _buildLegendItem('Voltage (V)', Colors.yellow),
                 const SizedBox(width: 16),
                 _buildLegendItem('Current (A)', Colors.green),
                 const SizedBox(width: 16),
-                _buildLegendItem('Power (W)', Colors.orange),
+                _buildLegendItem('Power (W)', Colors.blue),
               ],
             ),
             const SizedBox(height: 8),

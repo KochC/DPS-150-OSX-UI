@@ -12,9 +12,6 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('DPS-150 Control'),
-      ),
       body: SafeArea(
         child: Consumer<DeviceProvider>(
           builder: (context, provider, child) {
@@ -54,31 +51,33 @@ class MainScreen extends StatelessWidget {
             final state = provider.state;
             return LayoutBuilder(
               builder: (context, constraints) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Left side: Time graph (expands to fill remaining space)
-                    Expanded(
-                      flex: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 8, top: 16, bottom: 16),
-                        child: TimeGraph(
-                          voltage: state.outputVoltage,
-                          current: state.outputCurrent,
-                          power: state.outputPower,
-                          outputEnabled: state.outputClosed,
+                return IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Left side: Time graph (expands to fill remaining space)
+                      Expanded(
+                        flex: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 8, top: 16, bottom: 16),
+                          child: TimeGraph(
+                            voltage: state.outputVoltage,
+                            current: state.outputCurrent,
+                            power: state.outputPower,
+                            outputEnabled: state.outputClosed,
+                          ),
                         ),
                       ),
-                    ),
-                    // Right side: Value controls (fixed width)
-                    SizedBox(
-                      width: 400,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 16, top: 16, bottom: 16),
-                        child: LiveMonitor(state: state),
+                      // Right side: Value controls (fixed width)
+                      SizedBox(
+                        width: 400,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 16, top: 16, bottom: 16),
+                          child: LiveMonitor(state: state),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             );

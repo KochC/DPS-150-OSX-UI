@@ -148,13 +148,12 @@ class _LiveMonitorState extends State<LiveMonitor> {
     _updateControllersFromState();
 
     return Card(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
               // Enable button at the top
               SizedBox(
                 width: double.infinity,
@@ -229,7 +228,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                 'Voltage',
                 widget.state.outputVoltage,
                 'V',
-                Colors.blue,
+                Colors.yellow,
                 _voltageSetpointController,
                 _ovpController,
                 (value) => Provider.of<DeviceProvider>(context, listen: false).setVoltage(value),
@@ -258,7 +257,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                       'Power',
                       widget.state.outputPower,
                       'W',
-                      Colors.orange,
+                      Colors.blue,
                       _oppController,
                       (value) => Provider.of<DeviceProvider>(context, listen: false).setOpp(value),
                     ),
@@ -280,7 +279,6 @@ class _LiveMonitorState extends State<LiveMonitor> {
             ],
           ),
         ),
-      ),
     );
   }
 
