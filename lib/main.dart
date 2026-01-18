@@ -22,21 +22,61 @@ class MyApp extends StatelessWidget {
         title: 'DPS-150 Control',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.light,
+          brightness: Brightness.dark,
+          colorScheme: ColorScheme.dark(
+            primary: const Color(0xFF00D4FF), // Bright cyan/teal - matches app icon
+            secondary: const Color(0xFF00B8D4), // Slightly darker cyan
+            tertiary: const Color(0xFF00ACC1), // Darker teal accent
+            surface: const Color(0xFF1E1E1E), // Dark gray background
+            surfaceContainerHighest: const Color(0xFF2D2D2D), // Elevated surfaces
+            onSurface: const Color(0xFFE0E0E0), // Light text on dark
+            onPrimary: const Color(0xFF000000), // Black text on cyan buttons
+            background: const Color(0xFF121212), // Very dark background
+            error: const Color(0xFFCF6679), // Softer red for errors
+            onError: const Color(0xFF000000),
+            outline: const Color(0xFF424242), // Borders
           ),
+          scaffoldBackgroundColor: const Color(0xFF121212),
           cardTheme: CardThemeData(
             elevation: 2,
+            color: const Color(0xFF1E1E1E),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF1E1E1E),
+            elevation: 0,
+            foregroundColor: Color(0xFF00D4FF),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xFF1E1E1E),
+            selectedItemColor: Color(0xFF00D4FF),
+            unselectedItemColor: Color(0xFF757575),
+            type: BottomNavigationBarType.fixed,
+          ),
           inputDecorationTheme: InputDecorationTheme(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
+              borderSide: const BorderSide(color: Color(0xFF424242)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: const BorderSide(color: Color(0xFF424242)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: const BorderSide(color: Color(0xFF00D4FF), width: 2),
+            ),
+            fillColor: const Color(0xFF1E1E1E),
+            filled: true,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF00D4FF),
+              foregroundColor: const Color(0xFF000000),
+              elevation: 2,
             ),
           ),
         ),

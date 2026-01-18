@@ -25,16 +25,26 @@ class MainScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.usb_off, size: 64, color: Colors.grey),
+                    Icon(
+                      Icons.usb_off, 
+                      size: 64, 
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                    ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       'Please connect to a device',
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 18, 
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                      ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'Go to the Connection tab to connect',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                      style: TextStyle(
+                        fontSize: 12, 
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                      ),
                     ),
                   ],
                 ),

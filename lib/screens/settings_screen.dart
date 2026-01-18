@@ -200,9 +200,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Voltage (V)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 12, 
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       TextField(
@@ -234,9 +237,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Current (A)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 12, 
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       TextField(

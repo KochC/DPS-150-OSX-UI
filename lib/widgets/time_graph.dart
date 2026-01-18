@@ -325,10 +325,12 @@ class _TimeGraphState extends State<TimeGraph> {
             SizedBox(
               height: 300,
               child: _dataPoints.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No data yet. Connect to device and enable output.',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                        ),
                       ),
                     )
                   : LineChart(
@@ -375,7 +377,7 @@ class _TimeGraphState extends State<TimeGraph> {
                           horizontalInterval: 1.0, // 10 divisions (0-10)
                           getDrawingHorizontalLine: (value) {
                             return FlLine(
-                              color: Colors.grey.withOpacity(0.2),
+                              color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
                               strokeWidth: 1,
                             );
                           },
@@ -401,8 +403,8 @@ class _TimeGraphState extends State<TimeGraph> {
                                   if (secondsFromNow % 600 == 0) {
                                     return Text(
                                       '${-secondsFromNow ~/ 60}m',
-                                      style: const TextStyle(
-                                        color: Colors.grey,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                         fontSize: 10,
                                       ),
                                     );
@@ -412,8 +414,8 @@ class _TimeGraphState extends State<TimeGraph> {
                                   if (secondsFromNow % 60 == 0) {
                                     return Text(
                                       '${-secondsFromNow ~/ 60}m',
-                                      style: const TextStyle(
-                                        color: Colors.grey,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                         fontSize: 10,
                                       ),
                                     );
@@ -423,8 +425,8 @@ class _TimeGraphState extends State<TimeGraph> {
                                   if (secondsFromNow % 10 == 0) {
                                     return Text(
                                       '${-secondsFromNow}s',
-                                      style: const TextStyle(
-                                        color: Colors.grey,
+                                      style: TextStyle(
+                                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                         fontSize: 10,
                                       ),
                                     );
@@ -445,8 +447,8 @@ class _TimeGraphState extends State<TimeGraph> {
                                 final actualValue = (value / 10.0) * _maxValue;
                                 return Text(
                                   actualValue.toStringAsFixed(1),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                     fontSize: 10,
                                   ),
                                 );
@@ -459,13 +461,14 @@ class _TimeGraphState extends State<TimeGraph> {
                         ),
                         borderData: FlBorderData(
                           show: true,
-                          border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                          ),
                         ),
                         minX: 0,
                         maxX: _getMaxTime(),
                         minY: 0,
-                        maxY: 10.0, // 10 divisions
-                        // Disable animations
+                        maxY: 10.0,
                         clipData: const FlClipData.all(),
                         lineBarsData: [
                           // Voltage line segments (split by output state changes)
@@ -476,8 +479,6 @@ class _TimeGraphState extends State<TimeGraph> {
                           ..._getPowerLineSegments(),
                         ],
                       ),
-                      duration: const Duration(milliseconds: 300), // Smooth chart animations
-                      curve: Curves.easeOut,
                     ),
             ),
             const SizedBox(height: 8),
@@ -512,7 +513,10 @@ class _TimeGraphState extends State<TimeGraph> {
         const SizedBox(width: 4),
         Text(
           label,
-          style: const TextStyle(fontSize: 12, color: Colors.grey),
+          style: TextStyle(
+            fontSize: 12, 
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+          ),
         ),
       ],
     );
@@ -542,12 +546,15 @@ class _TimeGraphState extends State<TimeGraph> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
+        Text(
           'Timeframe: ',
-          style: TextStyle(fontSize: 11, color: Colors.grey),
+          style: TextStyle(
+            fontSize: 11, 
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          ),
         ),
         ...timeframes.map((duration) {
-          final isSelected = _timeframe == duration;
+          final isSelected = _timeframe.inMilliseconds == duration.inMilliseconds;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: InkWell(
@@ -556,13 +563,13 @@ class _TimeGraphState extends State<TimeGraph> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? Colors.blue.withOpacity(0.2)
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.2)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(
                     color: isSelected
-                        ? Colors.blue
-                        : Colors.grey.withOpacity(0.3),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.outline.withOpacity(0.3),
                     width: isSelected ? 1.5 : 1,
                   ),
                 ),
@@ -570,7 +577,9 @@ class _TimeGraphState extends State<TimeGraph> {
                   _formatDuration(duration),
                   style: TextStyle(
                     fontSize: 11,
-                    color: isSelected ? Colors.blue : Colors.grey,
+                    color: isSelected 
+                        ? Theme.of(context).colorScheme.primary 
+                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),

@@ -64,25 +64,31 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
     switch (provider.status) {
       case ConnectionStatus.disconnected:
         statusText = 'Disconnected';
-        statusColor = Colors.grey;
+        statusColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
         statusIcon = const Icon(Icons.circle, size: 12);
         break;
       case ConnectionStatus.scanning:
         statusText = 'Scanning for device...';
-        statusColor = Colors.blue;
-        statusIcon = const SizedBox(
+        statusColor = Theme.of(context).colorScheme.primary;
+        statusIcon = SizedBox(
           width: 12,
           height: 12,
-          child: CircularProgressIndicator(strokeWidth: 2),
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         );
         break;
       case ConnectionStatus.connecting:
         statusText = 'Connecting...';
-        statusColor = Colors.blue;
-        statusIcon = const SizedBox(
+        statusColor = Theme.of(context).colorScheme.primary;
+        statusIcon = SizedBox(
           width: 12,
           height: 12,
-          child: CircularProgressIndicator(strokeWidth: 2),
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         );
         break;
       case ConnectionStatus.connected:
@@ -92,7 +98,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
         break;
       case ConnectionStatus.error:
         statusText = 'Error: ${provider.errorMessage ?? "Unknown error"}';
-        statusColor = Colors.red;
+        statusColor = Theme.of(context).colorScheme.error;
         statusIcon = const Icon(Icons.error, size: 12);
         break;
     }
@@ -215,16 +221,25 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    const Icon(Icons.usb_off, size: 48, color: Colors.grey),
+                    Icon(
+                      Icons.usb_off, 
+                      size: 48, 
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                    ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'No compatible devices found',
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '${provider.availablePorts.length} total port(s) detected',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -238,17 +253,23 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                 
                 return Card(
                   margin: const EdgeInsets.only(bottom: 8),
-                  color: isUsbModem ? Colors.blue.withOpacity(0.05) : null,
+                  color: isUsbModem 
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.05) 
+                      : null,
                   child: ListTile(
                     leading: Icon(
                       isUsbModem ? Icons.usb : Icons.settings_input_component,
-                      color: isUsbModem ? Colors.blue : Colors.grey,
+                      color: isUsbModem 
+                          ? Theme.of(context).colorScheme.primary 
+                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                     ),
                     title: Text(
                       port.device,
                       style: TextStyle(
                         fontWeight: isUsbModem ? FontWeight.bold : FontWeight.normal,
-                        color: isUsbModem ? Colors.blue : null,
+                        color: isUsbModem 
+                            ? Theme.of(context).colorScheme.primary 
+                            : null,
                       ),
                     ),
                     subtitle: Column(
@@ -257,11 +278,11 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                         if (port.description != null)
                           Text(port.description!),
                         if (isUsbModem)
-                          const Text(
+                          Text(
                             'USB Modem Device (Auto-connect)',
                             style: TextStyle(
                               fontSize: 11,
-                              color: Colors.blue,
+                              color: Theme.of(context).colorScheme.primary,
                               fontStyle: FontStyle.italic,
                             ),
                           ),
@@ -303,9 +324,11 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
             if (info.firmwareVersion.isNotEmpty)
               _buildInfoRow('Firmware', info.firmwareVersion),
             if (info.isEmpty)
-              const Text(
+              Text(
                 'No device information available',
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                ),
               ),
           ],
         ),
@@ -321,7 +344,9 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
         children: [
           Text(
             label,
-            style: const TextStyle(color: Colors.grey),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+            ),
           ),
           Text(value),
         ],

@@ -168,8 +168,12 @@ class _LiveMonitorState extends State<LiveMonitor> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: widget.state.outputClosed ? Colors.green : Colors.grey,
-                    foregroundColor: Colors.white,
+                    backgroundColor: widget.state.outputClosed 
+                        ? Colors.green 
+                        : Theme.of(context).colorScheme.surfaceContainerHighest,
+                    foregroundColor: widget.state.outputClosed 
+                        ? Colors.white 
+                        : Theme.of(context).colorScheme.onSurface,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                   child: Text(
@@ -198,7 +202,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                     child: _buildStatusChip(
                       'Mode',
                       widget.state.mode == Mode.cc ? 'CC' : 'CV',
-                      Colors.blue,
+                      Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -333,7 +337,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                       'Target $unit',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey[600],
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -382,7 +386,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                       'Limit $unit',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.grey[600],
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -391,13 +395,13 @@ class _LiveMonitorState extends State<LiveMonitor> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.red,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                       decoration: InputDecoration(
                         suffixText: unit,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
-                          borderSide: BorderSide(color: Colors.red.withOpacity(0.5)),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.error.withOpacity(0.5)),
                         ),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                         isDense: true,
@@ -479,7 +483,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
                 'Limit $unit',
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey[600],
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
               const SizedBox(height: 4),
@@ -547,7 +551,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
             label,
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey[600],
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
             ),
           ),
           const SizedBox(height: 4),
@@ -627,12 +631,12 @@ class _LiveMonitorState extends State<LiveMonitor> {
           padding: EdgeInsets.zero,
           side: BorderSide(
             color: isActive 
-                ? Colors.blue 
-                : Colors.blue.withOpacity(0.5),
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.primary.withOpacity(0.5),
             width: isActive ? 2 : 1,
           ),
           backgroundColor: isActive 
-              ? Colors.blue.withOpacity(0.1) 
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.1) 
               : Colors.transparent,
         ),
         child: Text(
@@ -640,7 +644,9 @@ class _LiveMonitorState extends State<LiveMonitor> {
           style: TextStyle(
             fontSize: 11,
             fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-            color: isActive ? Colors.blue : Colors.black,
+            color: isActive 
+                ? Theme.of(context).colorScheme.primary 
+                : Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ),
@@ -662,7 +668,7 @@ class _LiveMonitorState extends State<LiveMonitor> {
             label,
             style: TextStyle(
               fontSize: 10,
-              color: Colors.grey[600],
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
             ),
           ),
           const SizedBox(height: 4),
